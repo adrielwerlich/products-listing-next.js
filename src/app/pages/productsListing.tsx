@@ -6,7 +6,7 @@ import styled from "styled-components";
 const CardGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 280px;
+    grid-auto-rows: 300px;
     gap: 23px;
 `;
 

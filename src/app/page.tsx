@@ -54,9 +54,7 @@ const Page = () => {
             <Footer />
           </>
         ) : (
-          <div className="bg-[#F9F9F9] flex h-full w-full justify-center items-center">
-            <StyledSpinner />
-          </div>
+          <StyledSpinner />
         )}
       </CartProvider>
     </>

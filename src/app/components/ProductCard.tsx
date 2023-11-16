@@ -10,7 +10,7 @@ interface Props {
 
 const ProductCardContainer = styled.div`
   width: 217.562px;
-  height: 285px;
+  height: 300px;
   flex-shrink: 0;
   border-radius: 8px;
   background: #fff;
@@ -31,7 +31,7 @@ const ProductName = styled.h2`
 
 const SmallText = styled.p`
   width: 192px;
-  height: 25px;
+  height: 45px;
   flex-shrink: 0;
   color: #2c2c2c;
   font-family: Montserrat;
@@ -126,7 +126,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         />
       </div>
       <div className="h-24">
-        <ProductInfoContainer className="h-24">
+        <ProductInfoContainer className="h-28">
           <FlexRow>
             <ProductName>{product.name}</ProductName>
             <PriceTag>
@@ -134,7 +134,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
             </PriceTag>
           </FlexRow>
           <SmallText title={product.description}>
-            {product.description.substring(0, 56)}
+            {product.description}
           </SmallText>
         </ProductInfoContainer>
         <BuyButton onClick={() => addToCart(product)}>
