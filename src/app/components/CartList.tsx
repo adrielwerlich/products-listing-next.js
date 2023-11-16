@@ -3,7 +3,6 @@ import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
 import CloseIcon from "../assets/icons/CloseIcon";
 import CartItem from "./CartItem";
-// import { Product } from "../types/product";
 
 interface CartListProps {
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,8 +10,6 @@ interface CartListProps {
 
 export const CartList = ({ setIsCartOpen }: CartListProps) => {
   const { cartItems, formattedCartTotal } = useContext(CartContext);
-
-  console.log(cartItems, "cart list");
 
   return (
     <div id="cart-list">

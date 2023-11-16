@@ -18,5 +18,26 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #F9F9F9;
+  background: #f9f9f9;
+  /* Set the width and height of the scrollbar */
+  scrollbar-width: thin;
+
+  /* Set the color of the scrollbar track */
+  scrollbar-color: #f5f5f5 #ddd;
+
+  /* Set the styles for the scrollbar thumb */
+  scrollbar-thumb-border-radius: 10px;
+  scrollbar-thumb-background-color: #437bcf;
+}
+
+/* Set the styles for the scrollbar track */
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Set the styles for the scrollbar thumb */
+body::-webkit-scrollbar-thumb {
+  background-color: #437bcf;
+  border-radius: 10px;
 }
