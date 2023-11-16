@@ -1,13 +1,13 @@
 import React, { createContext, useState } from "react";
 import { Product } from "../types/product";
 
-type CartItem = {
+export type CartItemType = {
   product: Product;
   quantity: number;
 };
 
 type CartContextType = {
-  cartItems: CartItem[];
+  cartItems: CartItemType[];
   addToCart: (product: Product) => void;
   removeFromCart: (product: Product) => void;
   reduceQuantity: (product: Product) => void;
@@ -27,9 +27,10 @@ export const CartContext = createContext<CartContextType>({
 export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
 
   const addToCart = (product: Product) => {
+    debugger
     const existingCartItem = cartItems.find(
       (item) => item.product.id === product.id
     );

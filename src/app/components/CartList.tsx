@@ -3,7 +3,7 @@ import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
 import CloseIcon from "../assets/icons/CloseIcon";
 import CartItem from "./CartItem";
-import { Product } from "../types/product";
+// import { Product } from "../types/product";
 
 interface CartListProps {
   setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,16 +26,18 @@ export const CartList = ({ setIsCartOpen }: CartListProps) => {
 
       <CartContainer>
         {cartItems.map((item) => (
-          <CartItem key={item.product.id} product={item.product} />
+          <CartItem key={item.product.id} item={item} />
         ))}
       </CartContainer>
       <CartFooter>
-        <TotalText>Total:</TotalText>
-        <TotalText>{formattedCartTotal}</TotalText>
+        <TextContainer>
+          <TotalText>Total:</TotalText>
+          <TotalText>{formattedCartTotal}</TotalText>
+        </TextContainer>
+        <GotoCheckoutButton>
+          <FinishText>Finalizar compra</FinishText>
+        </GotoCheckoutButton>
       </CartFooter>
-      <GotoCheckoutButton>
-        <FinishText>Finalizar compra</FinishText>
-      </GotoCheckoutButton>
     </div>
   );
 };
@@ -59,8 +61,6 @@ const GotoCheckoutButton = styled.button`
   width: 486px;
   height: 97px;
   background: #000;
-  position: absolute;
-  bottom: 0;
 `;
 
 const TotalText = styled.span`
@@ -72,11 +72,19 @@ const TotalText = styled.span`
   line-height: 15px;
 `;
 
-const CartFooter = styled.div`
+const TextContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 2rem 3rem 0 4rem;
+  margin-bottom: 2rem;
+`;
+
+const CartFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
 `;
 
 const CartContainer = styled.div`

@@ -5,29 +5,34 @@ import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
 import { CounterInput } from "./CounterInput";
 import CloseIcon from "../assets/icons/CloseIcon";
+import { CartItemType } from "../context/CartContext";
+
 interface Props {
-  product: Product;
+  item: CartItemType;
 }
 
-const CartItem: React.FC<Props> = ({ product }) => {
-  const formattedPrice = product?.price?.toLocaleString("pt-BR", {
+const CartItem: React.FC<Props> = ({ item }) => {
+  const formattedPrice = item.product?.price?.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
+
+  console.log(item, "cart item");
+  
 
   const { removeFromCart } = useContext(CartContext);
 
   return (
     <>
-      <CloseButton onClick={() => removeFromCart(product)}>
+      <CloseButton onClick={() => removeFromCart(item.product)}>
         <CloseIcon size={18} />
         <Close>x</Close>
       </CloseButton>
       <CartItemContainer>
         <ImageContainer>
           <Image
-            src={product.photo}
-            alt={product.name}
+            src={item.product.photo}
+            alt={item.product.name}
             width={100}
             height={100}
             objectFit="cover"
@@ -36,8 +41,8 @@ const CartItem: React.FC<Props> = ({ product }) => {
         <div>
           <ProductInfoContainer>
             <FlexRow>
-              <ProductName>{product.name}</ProductName>
-              <CounterInput product={product} />
+              <ProductName>{item.product.name}</ProductName>
+              <CounterInput item={item} />
               <PriceTag>R${formattedPrice}</PriceTag>
             </FlexRow>
           </ProductInfoContainer>
@@ -69,7 +74,7 @@ const CloseButton = styled.button`
   flex-shrink: 0;
   fill: #000;
   position: relative;
-  right: 23px;
+  right: 13px;
   top: 21px;
   align-self: flex-end;
 `;

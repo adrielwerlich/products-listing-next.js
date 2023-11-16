@@ -1,23 +1,26 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
-import { CartContext } from "../context/CartContext";
+import { CartContext, CartItemType } from "../context/CartContext";
 import Pipe from "../assets/images/Pipe";
-import { Product } from "../types/product";
 
-export const CounterInput = ({ product }: { product: Product }) => {
-  const [value, setValue] = useState(1);
+export const CounterInput = ({ item }: { item: CartItemType }) => {
+  const [value, setValue] = useState(item.quantity);
 
-  const { cartItems, addToCart, reduceQuantity, removeFromCart } = useContext(CartContext);
+  const { addToCart, reduceQuantity, cartItems } = useContext(CartContext);
+
+  useEffect(() => {
+    setValue(item.quantity);
+  }, [cartItems]);
 
   const handleIncrease = () => {
     setValue(value + 1);
-    addToCart(product);
+    addToCart(item.product);
   };
 
   const handleDecrease = () => {
     if (value > 1) {
       setValue(value - 1);
-      reduceQuantity(product);
+      reduceQuantity(item.product);
     }
   };
 
