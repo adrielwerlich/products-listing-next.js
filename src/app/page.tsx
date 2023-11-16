@@ -8,6 +8,8 @@ import { Product } from "../app/types/product";
 import ProductListing from "./pages/productsListing";
 import { CartList, CartCounter } from "./components/CartList";
 import { CartProvider } from "./context/CartContext";
+import Footer from "./components/Footer";
+
 interface Props {
   products: Product[];
 }
@@ -49,9 +51,12 @@ const Page = () => {
             <CartWrapper isopen={isCartOpen}>
               <CartList setIsCartOpen={setIsCartOpen} />
             </CartWrapper>
+            <Footer />
           </>
         ) : (
-          <StyledSpinner />
+          <div className="bg-[#F9F9F9] flex h-full w-full justify-center items-center">
+            <StyledSpinner />
+          </div>
         )}
       </CartProvider>
     </>
