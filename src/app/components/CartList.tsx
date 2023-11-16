@@ -10,7 +10,7 @@ interface CartListProps {
 }
 
 export const CartList = ({ setIsCartOpen }: CartListProps) => {
-  const { cartItems, addToCart } = useContext(CartContext);
+  const { cartItems, formattedCartTotal } = useContext(CartContext);
 
   console.log(cartItems, "cart list");
 
@@ -29,6 +29,13 @@ export const CartList = ({ setIsCartOpen }: CartListProps) => {
           <CartItem key={item.product.id} product={item.product} />
         ))}
       </CartContainer>
+      <CartFooter>
+        <TotalText>Total:</TotalText>
+        <TotalText>{formattedCartTotal}</TotalText>
+      </CartFooter>
+      <GotoCheckoutButton>
+        <FinishText>Finalizar compra</FinishText>
+      </GotoCheckoutButton>
     </div>
   );
 };
@@ -39,12 +46,52 @@ export const CartCounter = () => {
   return <>{cartItemCount}</>;
 };
 
+const FinishText = styled.span`
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 15px; /* 53.571% */
+`;
+
+const GotoCheckoutButton = styled.button`
+  width: 486px;
+  height: 97px;
+  background: #000;
+  position: absolute;
+  bottom: 0;
+`;
+
+const TotalText = styled.span`
+  color: #fff;
+  font-family: Montserrat;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 15px;
+`;
+
+const CartFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem 3rem 0 4rem;
+`;
+
 const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 1rem;
-  margin: 60px 0 0 48px;
+  margin: 40px 0 0 48px;
+  height: 60vh;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const Title = styled.h1`

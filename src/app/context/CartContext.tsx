@@ -12,12 +12,14 @@ type CartContextType = {
   removeFromCart: (product: Product) => void;
   reduceQuantity: (product: Product) => void;
   cartItemCount: number;
+  formattedCartTotal: string;
 };
 
 export const CartContext = createContext<CartContextType>({
   cartItems: [],
   addToCart: () => {},
   cartItemCount: 0,
+  formattedCartTotal: "",
   removeFromCart: () => {},
   reduceQuantity: () => {},
 });
@@ -70,6 +72,16 @@ export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({
     0
   );
 
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + item.product.price * item.quantity,
+    0
+  );
+
+  const formattedCartTotal = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(cartTotal);
+
   return (
     <CartContext.Provider
       value={{
@@ -78,6 +90,7 @@ export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({
         cartItemCount,
         removeFromCart,
         reduceQuantity,
+        formattedCartTotal,
       }}
     >
       {children}
