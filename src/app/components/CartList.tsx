@@ -88,10 +88,13 @@ const CartContainer = styled.div`
   height: 60vh;
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    display: none;
+    width: 8px;
+    height: 8px;
   }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  &::-webkit-scrollbar-thumb {
+    background-color: #007aff;
+    border-radius: 20px;
+  }
 `;
 
 const Title = styled.h1`
