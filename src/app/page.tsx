@@ -9,24 +9,21 @@ import ProductListing from "./pages/ProductsListing";
 import { CartList, CartCounter } from "./components/CartList/CartList";
 import { CartProvider } from "./context/CartContext";
 import Footer from "./components/Footer/Footer";
+import { useQuery, QueryClientProvider } from 'react-query'
 
 interface Props {
   products: Product[];
 }
 
 const Page = () => {
-  const [products, setProducts] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const result = await getProducts();
-      setTimeout(() => {
-        setProducts(result.products);
-      }, 2000);
-    }
-    fetchProducts();
-  }, []);
+  const { data, isLoading, error } = useQuery('Products', async () => {
+    const response = await fetch(
+      'https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC',
+    )
+    return response.json()
+  })
 
   return (
     <>
@@ -43,16 +40,18 @@ const Page = () => {
             </CartCounterContainer>
           </CartButton>
         </nav>
-        {products.length > 0 ? (
+        {!isLoading ? (
           <>
             <div className="flex h-full w-full">
-              {products.length > 0 && <ProductListing products={products} />}
+              {data.products.length > 0 && <ProductListing products={data.products} />}
             </div>
             <CartWrapper isopen={isCartOpen}>
               <CartList setIsCartOpen={setIsCartOpen} />
             </CartWrapper>
             <Footer />
           </>
+        ) : error ? (
+          <p>Error: {error}</p>
         ) : (
           <StyledSpinner />
         )}
