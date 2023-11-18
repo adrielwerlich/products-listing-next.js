@@ -30,7 +30,6 @@ export const CartProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
 
   const addToCart = (product: Product) => {
-    debugger
     const existingCartItem = cartItems.find(
       (item) => item.product.id === product.id
     );

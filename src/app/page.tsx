@@ -5,10 +5,10 @@ import styled, { keyframes } from "styled-components";
 import CartIcon from "./assets/icons/CartIcon";
 import { getProducts } from "../app/utils/api";
 import { Product } from "../app/types/product";
-import ProductListing from "./pages/productsListing";
-import { CartList, CartCounter } from "./components/CartList";
+import ProductListing from "./pages/ProductsListing";
+import { CartList, CartCounter } from "./components/CartList/CartList";
 import { CartProvider } from "./context/CartContext";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 
 interface Props {
   products: Product[];

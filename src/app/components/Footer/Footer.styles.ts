@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -9,11 +8,3 @@ export const Container = styled.div`
   font-size: 12px;
   background: #dedede;
 `;
-
-export default function Footer() {
-  return (
-    <Container>
-      <span>MKS sistemas © Todos os direitos reservados</span>
-    </Container>
-  );
-}
