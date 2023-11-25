@@ -9,8 +9,9 @@ import ProductListing from "./pages/ProductsListing";
 import { CartList, CartCounter } from "./components/CartList/CartList";
 import { CartProvider } from "./context/CartContext";
 import Footer from "./components/Footer/Footer";
-import { useQuery, QueryClientProvider } from 'react-query'
+import { useQuery } from 'react-query'
 
+import { dummy } from "./utils/dummy";
 interface Props {
   products: Product[];
 }
@@ -20,9 +21,10 @@ const Page = () => {
 
   const { data, isLoading, error } = useQuery('Products', async () => {
     const response = await fetch(
-      'https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC',
+      'https://mks-fromntend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=id&orderBy=DESC',
     )
     return response.json()
+    // return []
   })
 
   return (
@@ -43,7 +45,7 @@ const Page = () => {
         {!isLoading ? (
           <>
             <div className="flex h-full w-full">
-              {data.products.length > 0 && <ProductListing products={data.products} />}
+              {data?.products?.length > 0 || dummy?.length && <ProductListing products={data?.products ?? dummy} />}
             </div>
             <CartWrapper isopen={isCartOpen}>
               <CartList setIsCartOpen={setIsCartOpen} />
